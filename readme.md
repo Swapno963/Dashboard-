@@ -1,6 +1,9 @@
-This is a dashbord app,hear I load data from json file.
+# AnalyzeHub: Dashboard App Backend
 
-key feature:
+This is the backend of the Dashboard App, built with Django and Django REST Framework (DRF).
 
-1. Custom file for generating requirements.txt files
-2. Command for uploading json file
+## Features
+
+- RESTful API endpoints for data analysis
+- Management commands for data import and cleanup
+- Support for correlation and summary statistics
