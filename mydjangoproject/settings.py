@@ -39,7 +39,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "rest_framework",
     "mydashbord",
+    "corsheaders",
+    "django_filters",
+    # "app_titanic",
 ]
+# for filter 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+        # ...
+    ),
+     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,6 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'mydjangoproject.urls'
@@ -75,22 +89,22 @@ WSGI_APPLICATION = 'mydjangoproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # for extranal database
 
-DATABASES = {
-    'default': dj_database_url.config(
-        # Feel free to alter this value to suit your needs.
-        default="postgresql://dashborddb_user:EzCTbQUZz1tgmRrHqWzWdWxtEURb5Wi0@dpg-cqcdhdd6l47c73d28ea0-a.oregon-postgres.render.com/dashborddb",
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Feel free to alter this value to suit your needs.
+#         default="postgresql://dashborddb_user:EzCTbQUZz1tgmRrHqWzWdWxtEURb5Wi0@dpg-cqcdhdd6l47c73d28ea0-a.oregon-postgres.render.com/dashborddb",
        
-    )
-}
+#     )
+# }
 
 
 
@@ -135,3 +149,25 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# all origin
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  
+]
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS',
+]
+
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'accept',
+    'authorization',
+    'x-requested-with',
+    'x-csrftoken',
+]
